@@ -5,5 +5,6 @@ class InjectUtils {
 
         ViewIDInjector.process(mainActivity);
         ClickProcessor.process(mainActivity);
+
     }
 }
