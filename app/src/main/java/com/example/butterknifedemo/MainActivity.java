@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
          */
         MyInterfaceUtil instance = MyInterfaceProxyUtil.getInstance(MainActivity.this);
         //调用动态代理的保存功能
-        instance.save("123");
+        instance.save("666");
 //        获取动态代理的一个字符串
-        String name = instance.get("123");
+        String name = instance.get("666");
         //将该字符串显示
         txtView.setText(name);
 

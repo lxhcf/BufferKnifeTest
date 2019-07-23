@@ -20,13 +20,12 @@ import java.lang.reflect.Proxy;
  * invocationHandler:
  * 获取注解类传入的参数:
  * 获取方法
- *
  */
 public class MyInterfaceProxyUtil {
 
     public static MyInterfaceUtil getInstance(Context c) {
         //接口不用实例化  MyInterfaceUtil.class
-        Context context =c;
+        Context context = c;
         final SharedPreferences sharedPreferences = context.getSharedPreferences("DBFile", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 //        Sp sp= (Sp) MyInterfaceUtil.class.getAnnotation(Sp.class);
@@ -35,7 +34,7 @@ public class MyInterfaceProxyUtil {
         /**
          * 1.classloader
          */
-        ClassLoader classLoader =  MyInterfaceUtil.class.getClassLoader();
+        ClassLoader classLoader = MyInterfaceUtil.class.getClassLoader();
         /**
          * 2.interface
          */
@@ -49,20 +48,24 @@ public class MyInterfaceProxyUtil {
                 if (true) {
                     //获取该对象的方法名
                     String methodName = method.getName();
-                    //获取注解传进的参数(错)
-                    SPData spData=method.getAnnotation(SPData.class);
-                    String inputValue=spData.value();
+
+                    SPData spData = method.getAnnotation(SPData.class);
+                    String inputValue="";
+                    for (Object object : objects) {
+//                        System.out.println(o);
+                         inputValue = (String) object;
+
+                    }
                     //获取方法传入的参数
 
                     //如果方法名以save开头
                     if (methodName.startsWith("save")) {
 //                        sharedPreferences.getString(key,"missing");
-                        editor.putString(inputValue,inputValue);
+                        editor.putString(inputValue, inputValue);
                         editor.apply();
-                    }
-                    else {
-                        if(methodName.startsWith("get"))
-                            return (String) sharedPreferences.getString(inputValue,inputValue);
+                    } else {
+                        if (methodName.startsWith("get"))
+                            return (String) sharedPreferences.getString(inputValue, inputValue);
                     }
                 }
                 return null;
