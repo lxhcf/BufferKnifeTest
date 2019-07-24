@@ -26,7 +26,7 @@ public class MyInterfaceProxyUtil {
     public static MyInterfaceUtil getInstance(Context c) {
         //接口不用实例化  MyInterfaceUtil.class
         Context context = c;
-        final SharedPreferences sharedPreferences = context.getSharedPreferences("DBFile", Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = context.getSharedPreferences("aa", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 //        Sp sp= (Sp) MyInterfaceUtil.class.getAnnotation(Sp.class);
 
@@ -44,28 +44,27 @@ public class MyInterfaceProxyUtil {
          */
         InvocationHandler h = new InvocationHandler() {
             @Override
-            public String invoke(Object o, Method method, Object[] objects) throws Throwable {
+                public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
+                //7.24 String 改成object
                 if (true) {
                     //获取该对象的方法名
                     String methodName = method.getName();
 
                     SPData spData = method.getAnnotation(SPData.class);
-                    String inputValue="";
-                    for (Object object : objects) {
-//                        System.out.println(o);
-                         inputValue = (String) object;
+                    String inputValue= (String) objects[0];
 
-                    }
+                    int a =  new Integer(1);
+                    int inputValue2= (int) objects[1];
                     //获取方法传入的参数
 
-                    //如果方法名以save开头
-                    if (methodName.startsWith("save")) {
+                    //如果方法名以save开头,
+                    if (methodName.startsWith("s")) {
 //                        sharedPreferences.getString(key,"missing");
                         editor.putString(inputValue, inputValue);
                         editor.apply();
                     } else {
                         if (methodName.startsWith("get"))
-                            return (String) sharedPreferences.getString(inputValue, inputValue);
+                            return  sharedPreferences.getString(inputValue, inputValue);
                     }
                 }
                 return null;

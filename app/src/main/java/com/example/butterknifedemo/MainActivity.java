@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.butterknifedemo.lx.MyInterfaceProxyUtil;
 import com.example.butterknifedemo.lx.MyInterfaceUtil;
+import com.example.butterknifedemo.shifu.PersonSpUtilProxy;
 
 public class MainActivity extends AppCompatActivity {
     @BindViewUtil(id = R.id.txt)
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         String name = instance.get("666");
         //将该字符串显示
         txtView.setText(name);
+
 
     }
 
