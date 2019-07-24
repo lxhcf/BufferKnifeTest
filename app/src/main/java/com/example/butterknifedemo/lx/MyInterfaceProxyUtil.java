@@ -26,9 +26,11 @@ public class MyInterfaceProxyUtil {
     public static MyInterfaceUtil getInstance(Context c) {
         //接口不用实例化  MyInterfaceUtil.class
         Context context = c;
-        final SharedPreferences sharedPreferences = context.getSharedPreferences("aa", Context.MODE_PRIVATE);
+        Sp sp= (Sp) MyInterfaceUtil.class.getAnnotation(Sp.class);
+        String fileName=sp.value();
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
-//        Sp sp= (Sp) MyInterfaceUtil.class.getAnnotation(Sp.class);
+
 
 
         /**
@@ -51,20 +53,20 @@ public class MyInterfaceProxyUtil {
                     String methodName = method.getName();
 
                     SPData spData = method.getAnnotation(SPData.class);
+                    String key=spData.value();
+
                     String inputValue= (String) objects[0];
 
-                    int a =  new Integer(1);
-                    int inputValue2= (int) objects[1];
                     //获取方法传入的参数
 
                     //如果方法名以save开头,
                     if (methodName.startsWith("s")) {
 //                        sharedPreferences.getString(key,"missing");
-                        editor.putString(inputValue, inputValue);
+                        editor.putString(key, inputValue);
                         editor.apply();
                     } else {
                         if (methodName.startsWith("get"))
-                            return  sharedPreferences.getString(inputValue, inputValue);
+                            return  sharedPreferences.getString(key, inputValue);
                     }
                 }
                 return null;

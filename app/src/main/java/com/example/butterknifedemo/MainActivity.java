@@ -73,12 +73,13 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 第三版:
          * 问题:怎么动态改变注解中的参数
+         * 答:不用改变,注解中的参数是故意写死的
          */
         MyInterfaceUtil instance = MyInterfaceProxyUtil.getInstance(MainActivity.this);
         //调用动态代理的保存功能
-        instance.save("666");
+        instance.save("奥克斯");
 //        获取动态代理的一个字符串
-        String name = instance.get("666");
+        String name = instance.get("奥克斯");
         //将该字符串显示
         txtView.setText(name);
 

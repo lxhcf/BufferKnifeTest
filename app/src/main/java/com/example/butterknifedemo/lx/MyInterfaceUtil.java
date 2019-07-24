@@ -1,5 +1,5 @@
 package com.example.butterknifedemo.lx;
-@Sp(value = "myvalue")
+@Sp(value = "myfile")
 public interface MyInterfaceUtil {
     @SPData(value = "mydata")
     public void save(String s);
