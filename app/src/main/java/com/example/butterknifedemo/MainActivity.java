@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.butterknifedemo.lx.MyInterfaceProxyUtil;
-import com.example.butterknifedemo.lx.MyInterfaceUtil;
-import com.example.butterknifedemo.shifu.PersonSpUtilProxy;
+import com.example.butterknifedemo.fruit.Fruit;
+import com.example.butterknifedemo.fruit.FruitImpl;
+import com.example.butterknifedemo.fruit.FruitImplObjProxyHandler;
+import com.example.butterknifedemo.fruit.FruitImplProxyHandler;
+import com.example.butterknifedemo.fruit.FruitProxyHandler;
 
 public class MainActivity extends AppCompatActivity {
     @BindViewUtil(id = R.id.txt)
@@ -75,13 +77,38 @@ public class MainActivity extends AppCompatActivity {
          * 问题:怎么动态改变注解中的参数
          * 答:不用改变,注解中的参数是故意写死的
          */
-        MyInterfaceUtil instance = MyInterfaceProxyUtil.getInstance(MainActivity.this);
-        //调用动态代理的保存功能
-        instance.save("奥克斯");
-//        获取动态代理的一个字符串
-        String name = instance.get("奥克斯");
-        //将该字符串显示
-        txtView.setText(name);
+//        MyInterfaceUtil instance = MyInterfaceProxyUtil.getInstance(MainActivity.this);
+//        //调用动态代理的保存功能
+//        instance.save("奥克斯");
+////        获取动态代理的一个字符串
+//        String name = instance.get("奥克斯");
+//        //将该字符串显示
+//        txtView.setText(name);
+        /**
+         * 第四版:动态代理小demo
+         * 要求：运用Proxy动态代理来增强方法
+         * 题目：
+         *     1.定义接口Fruit，其中有addFruit方法
+         *     2.定义实现类FruitImpl，实现Fruit接口
+         *     3.定义测试类，利用动态代理类的方式，增强addFruit方法
+         */
+
+
+        //代理类的对象
+//        FruitImplObjProxyHandler fruitImplObjProxyHandler =new FruitImplObjProxyHandler();
+//        FruitImpl fruitIml=new FruitImpl();
+//        Fruit fruit=(Fruit) fruitImplObjProxyHandler.getInstace(fruitIml);
+//        fruit.addFruit();
+
+        //代理类
+//        FruitImplProxyHandler fruitImplProxyHandler=new FruitImplProxyHandler();
+//        Fruit fruit=(Fruit)fruitImplProxyHandler.getInstance();
+//        fruit.addFruit();
+
+        //代理接口
+        FruitProxyHandler fruitProxyHandler=new FruitProxyHandler();
+        Fruit fruit= (Fruit) fruitProxyHandler.getInstace();
+        fruit.addFruit();
 
 
     }
