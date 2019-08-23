@@ -3,17 +3,28 @@ package com.example.butterknifedemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.butterknifedemo.bindview.BindViewGroup;
 import com.example.butterknifedemo.fruit.Fruit;
 import com.example.butterknifedemo.fruit.FruitImpl;
 import com.example.butterknifedemo.fruit.FruitImplObjProxyHandler;
 import com.example.butterknifedemo.fruit.FruitImplProxyHandler;
 import com.example.butterknifedemo.fruit.FruitProxyHandler;
 
-public class MainActivity extends AppCompatActivity {
+
+
+@BindViewGroup(id = R.layout.activity_main)
+public class MainActivity extends BaseActivity {
+
     @BindViewUtil(id = R.id.txt)
     TextView txtView;
+
+//    @BindClick(id = R.id.txt, value = "onClick")
+
 
     /**
      * 7.22
@@ -21,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @BindClick(id = R.id.txt, value = "onClick")
     void onClick() {
 //        Log.d("Main", "单机方法被调用");
-//        txtView.setText("asdas");
+        txtView.setText("asdas");
 
         /**
          * 7.23
@@ -48,9 +59,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-//        初期做法
+        /**
+         * 8.8绑定页面布局id
+         */
+//        BindViewGroup bindViewGroup = (BindViewGroup) this.getClass().getAnnotation(BindViewGroup.class);
+//        int layout = bindViewGroup.id();
+//        setContentView(R.layout.activity_main);
+
+//        LinearLayout mainLayout = (LinearLayout) findViewById(layout);
+//        LayoutInflater layoutInflater = LayoutInflater.from(this);
+//        View buttonLayout = layoutInflater.inflate(R.layout.button_layout, null);
+//        mainLayout.addView(buttonLayout);
+
+
+////        初期做法
         InjectUtils.inject(this);
 
 //        Log.i("ele=========",ele+"");
@@ -106,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
 //        fruit.addFruit();
 
         //代理接口
-        FruitProxyHandler fruitProxyHandler=new FruitProxyHandler();
-        Fruit fruit= (Fruit) fruitProxyHandler.getInstace();
-        fruit.addFruit();
+//        FruitProxyHandler fruitProxyHandler = new FruitProxyHandler();
+//        Fruit fruit = (Fruit) fruitProxyHandler.getInstace();
+//        fruit.addFruit();
 
 
     }

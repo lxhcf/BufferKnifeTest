@@ -10,11 +10,9 @@ import java.lang.reflect.Method;
 
 public class ViewIDInjector {
     public static void process(final Object object) {
-
         Class class1 = object.getClass();
         //找到类里所有变量Field
         Field[] fields = class1.getDeclaredFields();
-
         //遍历Field数组
         for (Field field : fields) {
             //找到相应的拥有Add注解的Field
